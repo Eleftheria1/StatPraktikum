@@ -2,7 +2,6 @@ library("boot")
 library("corrplot")
 library("caret")
 library(e1071)
-#library(fastDummies)
 library(mfx)
 library("dplyr")
 library(effects)
@@ -167,14 +166,14 @@ plot(allEffects(modell_f16))
 margin_f10 <- logitmfx(modell_f10, atmean = TRUE, data = data)
 margin_f10
 
-### frage 18
-modell_f18 <- glm(f0201new ~ f1801 + f180201 + f180202,  family = binomial, data = data)
-summary(modell_f18)
-exp(modell_f18$coefficients)
-plot(allEffects(modell_f18))
+### frage 16, 2
+modell_f16_2 <- glm(f0201new ~ f1601 + f1602 + f1603 +I(f1601^2)+I(f1602^2),  family = binomial, data = data)
+summary(modell_f16_2)
+exp(modell_f16_2$coefficients)
+plot(allEffects(modell_f16_2))
 
-margin_f18 <- logitmfx(modell_f18, atmean = TRUE, data = data)
-margin_f18
+margin_f10 <- logitmfx(modell_f10, atmean = TRUE, data = data)
+margin_f10
 
 ### Mig, 1 ja, 2 nein
 modell_Mig <- glm(f0201new ~ Mig,  family = binomial, data = data)
@@ -193,6 +192,17 @@ plot(allEffects(modell_alter))
 
 margin_alter <- logitmfx(modell_alter, atmean = TRUE, data = data)
 margin_alter
+
+### Alter in ^2
+modell_alter_2 <- glm(f0201new ~  f20+I(f20^2),  family = binomial, data = data)
+summary(modell_alter_2)
+exp(modell_alter_2$coefficients)
+plot(allEffects(modell_alter_2))
+
+margin_alter <- logitmfx(modell_alter, atmean = TRUE, data = data)
+margin_alter
+
+anova(modell_alter, modell_alter_2)
 
 ### Schicht
 modell_schicht <- glm(f0201new ~ f22,  family = binomial, data = data)
@@ -215,5 +225,16 @@ summary(modell_schicht_auto)
 exp(modell_schicht_auto$coefficients)
 plot(allEffects(modell_schicht_auto))
 
+### Interaktion von Abschluss und Schicht
+modell_abs_sch <- glm(f0201new ~ f22*f15,  family = binomial, data = data)
+summary(modell_abs_sch)
+exp(modell_abs_sch$coefficients)
+plot(allEffects(modell_schicht))
 
+margin_schicht <- logitmfx(modell_schicht, atmean = TRUE, data = data)
+margin_schicht
 
+### Interaktion von Alter und Geschlecht
+mod_alter_g <- glm(f0201new ~ f20*f12, family = binomial, data = data)
+summary(mod_alter_g)
+AIC(mod_alter_g)

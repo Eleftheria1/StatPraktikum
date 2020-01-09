@@ -9,14 +9,23 @@ backward_AIC <- stepAIC(mod_full, direction = "backward", trace = F)
 backward_AIC$anova #The backward elimination procedure eliminated variables
                    # f0803, f0809, f0827...
                    # kept variables: Final Model:
-                   #f0201new ~ f0801 + f0805 + f0807 + f0808 + f0810 + f0811 
-                   #  + f0812 + f0813 + f0814 + f0815 + f0816 + f0817 + f0819 + f0820 + f0821 + 
-                   # f0823 + f0825
+                   #f0201new ~ f0101 + f05 + f07 + f0801 + f0803 + f0807 + f0808 + 
+                  #f0810 + f0811 + f0812 + f0813 + f0814 + f0815 + f0818 + f0819 + 
+                  #f0821 + f0823 + f0824 + f0825 + f0827 + f0902 + f0903 + f1003 + 
+                  # f11 + f12 + f1603 + f180201 + f180202 + Mig + f0202new + 
+                  # f0203new + f20
                   # stepAIC removes the Multicollinearity if it exists, from the model 
+mod_finalneu <- glm(f0201new ~ f0101 + f05 + f07 + f0801 + f0803 + f0807 + f0808 + 
+                      f0810 + f0811 + f0812 + f0813 + f0814 + f0815 + f0818 + f0819 + 
+                      f0821 + f0823 + f0824 + f0825 + f0827 + f0902 + f0903 + f1003 + 
+                      f11 + f12 + f1603 + f180201 + f180202 + Mig + f0202new + 
+                      f0203new + f20, family = binomial, data = data)
+summary(mod_finalneu)
+
 stepwise_AIC <- stepAIC(modell_frage8, direction = "both", trace = F)
 stepwise_AIC1 <- stepAIC(mod_full, direction = "backward", trace = T)
 
- stepwise_AIC$anova
+stepwise_AIC$anova
 
 finalmodel <- glm(y ~ f0101_2 + f0102_4 + f0102_6 + f0102_7 + f04_2 + f04_7 + f04_10 + 
                      f05_2 + f05_3 + f05_4 + f05_5 + f05_6 + f06_2 + f06_3 + f06_4 + 
@@ -130,15 +139,15 @@ modfff <- glm(y ~ f0101_2 + f0102_4 + f0102_6 + f0102_7 + f04_2 + f04_7 + f04_10
 summary(modfff) # 1663.2
 
 
-mod2<- glmnet(model.matrix(~ . - y ,data=data_NA),data_NA$y,family="binomial")
+mod2<- glmnet(model.matrix(~ . - f0201new ,data=data),data$f0201new,family="binomial")
 plot(mod2,xvar="lambda",label=T)
 library(ISLR)
-erg2<-cv.glmnet(model.matrix(~ . - y ,data=data_NA),data_NA$y,family="binomial")
+erg2<-cv.glmnet(model.matrix(~ . - f0201new ,data=data),data$f0201new,family="binomial")
 abline(v=log(erg2$lambda.1se))
-mod3<- glmnet(model.matrix(~ . - y ,data=data_NA),data_NA$y,family="binomial",lambda=erg2$lambda.1se)
+mod3<- glmnet(model.matrix(~ . - f0201new ,data=data),data$f0201new,family="binomial",lambda=erg2$lambda.1se)
 coefficients(mod3)
 which(coefficients(mod3) != 0) # wie viele variablen wurden gewählt ?
-                               # 52 variables selected 
+                               # 1 variables selected 
                               # by running mod3 -> getting DF = 51 because of p+1
 
 model_las <- glm(y~ f0101_2 + f0102_6 + f04_2 + f04_4 + f04_10 +
@@ -168,12 +177,13 @@ BIC
 ###########################
 #### Boosting 
 
-mod4<-glmboost(y~ . -y ,data=dummy_data,family="Binomial"(type="glm"),control = boost_control(mstop = 4000))
+mod4<-glmboost(f0201new ~ . -f0201new ,data=data,family="Binomial"(type="glm"),control = boost_control(mstop = 3000))
 x11()
+old_par <- par(mar = c(5,5,5,7.5))
 plot(mod4)
 summary(mod4)
 mod4
-AIC(mod4)
+
 
 # take final model
 model_boost <- glm(f0201new ~ f0801 + f0802 + f0804 + f0805 + f0807 + f0808 + f0810
@@ -198,6 +208,7 @@ AIC(model_fullboost)
 
 cvm4 <- cvrisk(mod4)
 x11()
+old_par <- par(mar = c(5,5,5,7.5))
 plot(cvm4)
 cvm4
 #### 

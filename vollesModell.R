@@ -1,5 +1,5 @@
 library("arm")
-setwd("C:/Users/Eleftheria/OneDrive/Desktop/5FS/statistisches praktikum")
+setwd("C:/Users/Eleftheria/OneDrive/Desktop/5FS/statistisches praktikum/Daten")
 dummy_data <- read.csv("dummy_data.csv")
 dummy_data <- dummy_data[, -c(56: 71)]
 dummy_data$f0201new_1 <- NULL

@@ -7,11 +7,24 @@ library(mfx)
 library("dplyr")
 
 setwd("C:/Users/elefi/OneDrive/Desktop/5FS/statistisches praktikum")
-setwd("C:/Users/Eleftheria/OneDrive/Desktop/5FS/statistisches praktikum")
-data <- read_sav("Daten_RadAktiv_final_Kunde.sav")
-data_reg <- read.csv("data_reg.csv")
+setwd("C:/Users/Eleftheria/OneDrive/Desktop/5FS/statistisches praktikum/Daten")
+data_alt <- read_sav("Daten_RadAktiv_final_Kunde.sav")
+
+#datensatz herrichten
+data <- read.csv("data.csv")
+# "keine Angabe" hinzufügen: beinhaltet NAs
+data[is.na(data)] <- 35
+data[sapply(data, is.numeric)] <- lapply(data[sapply(data, is.numeric)], as.factor)
+data$X <- NULL
+data$f20 <- NULL
+data$f20 <- data_alt$f20
+
+
+#data_reg <- read.csv("data_reg.csv")
 frage8_data <- read.csv("frage8_data.csv")
 dummy_f8_NA <- read.csv("dummy_f8_NA.csv")
+
+
 
 
 

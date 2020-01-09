@@ -40,6 +40,12 @@ mod_full_1 <- glm(f0201new ~ f15*f22 +., family = binomial, data = data)
 summary(mod_full_1)
 AIC(mod_full_1)
 
+mod_final_1 <- glm(f0201new ~ f15*f22 + f0101 + f05 + f07 + f0801 + f0803 + f0807 + f0808 + 
+                     f0810 + f0811 + f0812 + f0813 + f0814 + f0815 + f0818 + f0819 + 
+                     f0821 + f0823 + f0824 + f0825 + f0827 + f0902 + f0903 + f1003 + 
+                     f11 + f12 + f1603 + f180201 + f180202 + Mig + f0202new + 
+                     f0203new + f20, family = binomial, data = data)
+AIC(mod_final_1) # hier aic erhöht
 ### Interaktion Frage 8, nicht so gut
 mod_full_2 <- glm(f0201new ~ f0803*f0822 +f0804*f0824 +., family = binomial, data = data)
 summary(mod_full_2)
@@ -50,10 +56,19 @@ mod_full_3 <- glm(f0201new ~ f1601*f1602 +., family = binomial, data = data, max
 summary(mod_full_3)
 AIC(mod_full_1)
 
+
+
 ### Interaktion von  Abschluss und Alter, Abschluss und Schicht, Anzahl der Personen in ^2
 mod_full_4 <- glm(f0201new ~ f15*f20 + f15*f22 + I(f1601^2)+I(f1602^2)+., family = binomial, data = data)
 summary(mod_full_4)
 AIC(mod_full_4)
+
+mod_final_3 <- glm(f0201new ~ f15*f20 + f15*f22 + I(f1601^2)+I(f1602^2)+ f0101 + f05 + f07 + f0801 + f0803 + f0807 + f0808 + 
+                     f0810 + f0811 + f0812 + f0813 + f0814 + f0815 + f0818 + f0819 + 
+                     f0821 + f0823 + f0824 + f0825 + f0827 + f0902 + f0903 + f1003 + 
+                     f11 + f12 + f1603 + f180201 + f180202 + Mig + f0202new + 
+                     f0203new + f20, family = binomial, data = data)
+AIC(mod_final_3) # AIC schlechter
 
 ### Interaktion von Alter und Geschlecht, AIC schlechter
 mod_full_5 <- glm(f0201new ~ f20*f12+., family = binomial, data = data)
@@ -65,8 +80,20 @@ mod_full_6 <- glm(f0201new ~ f15*f20+., family = binomial, data = data)
 summary(mod_full_6)
 AIC(mod_full_6)
 
+mod_final_6 <- glm(f0201new ~ f15*f20+ f0101 + f05 + f07 + f0801 + f0803 + f0807 + f0808 + 
+                     f0810 + f0811 + f0812 + f0813 + f0814 + f0815 + f0818 + f0819 + 
+                     f0821 + f0823 + f0824 + f0825 + f0827 + f0902 + f0903 + f1003 + 
+                     f11 + f12 + f1603 + f180201 + f180202 + Mig + f0202new + 
+                     f0203new + f20, family = binomial, data = data)
+AIC(mod_final_6) #schlechter
 ### Interaktion Geschlecht und Abschluss
 mod_full_7 <- glm(f0201new ~ f15*f12+., family = binomial, data = data)
 summary(mod_full_7)
 AIC(mod_full_7)
 
+mod_final_7 <- glm(f0201new ~ f15*f12+f0101 + f05 + f07 + f0801 + f0803 + f0807 + f0808 + 
+                     f0810 + f0811 + f0812 + f0813 + f0814 + f0815 + f0818 + f0819 + 
+                     f0821 + f0823 + f0824 + f0825 + f0827 + f0902 + f0903 + f1003 + 
+                     f11 + f12 + f1603 + f180201 + f180202 + Mig + f0202new + 
+                     f0203new + f20, family = binomial, data = data)
+AIC(mod_final_7) #schlechter

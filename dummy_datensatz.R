@@ -3,14 +3,14 @@ library(dplyr)
 library(data.table)
 
 # datensatz mit dem ich arbeite
-setwd("C:/Users/Lisa/Documents/LMU/5. Semester/Statistisches Praktikum")
+setwd("C:/Users/Lisa/Documents/LMU/5. Semester/Statistisches Praktikum/Analysen")
 data <- read_sav("Daten_RadAktiv_final_Kunde.sav")
 
 # datensatz mit allen anfangsvariablen, einige werden zum neuen datensatz hinzugefügt
 daten <- read_sav("Daten_RadAktiv_final_Kunde.sav")
 
 # alle unnützliche variablen löschen
-data <- data[, -c(1,2,5,6,7,8,9,10,11,13,16,18:48,54:56,58,60,62,63,70:90,92,94,96:100,103:142)]
+data <- data[, -c(1,2,5,6,7,8,9,10,11,13,16,54:56,58,60,62,63,65:90,92,94,96:100,103:142)]
 
 # alle von uns neu definierte Variablen hinzufügen
 data$f01new <- replace(daten$f01, daten$f01 == 2, 1) %>%
@@ -45,8 +45,18 @@ data$f03new <- replace(daten$f03, daten$f03 == 1, 1) %>%
   replace(daten$f03 == 5, 1) %>%
   replace(daten$f03 == 6, 0)
 
+data$f04 <- gsub(x = data$f04, pattern = "88", replacement = "")
+data$f04 <- gsub(x = data$f04, pattern = "99", replacement = "")
+data$f06 <- gsub(x = data$f06, pattern = "88", replacement = "")
+data$f06 <- gsub(x = data$f06, pattern = "99", replacement = "")
+
+
 # alle variablen (außer "sonstiges") als factor
-data[sapply(data, is.numeric)] <- lapply(data[sapply(data, is.numeric)], as.factor)
+data[sapply(data, is.integer)] <- lapply(data[sapply(data, is.integer)], as.factor)
+
+data$f0204new <- NULL
+
+write.csv(data, "data.csv")
 
 # f14a? was ist das
 

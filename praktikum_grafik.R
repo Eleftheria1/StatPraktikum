@@ -4,8 +4,7 @@ library(tidyverse)
 #library(plyr)
 
 
-setwd("C:/Users/elefi/OneDrive/Desktop/5FS/statistisches praktikum")
-setwd("C:/Users/Eleftheria/OneDrive/Desktop/5FS/statistisches praktikum")
+setwd("C:/Users/Lisa/Documents/LMU/5. Semester/Statistisches Praktikum")
 data <- read_sav("Daten_RadAktiv_final_Kunde.sav")
 
 
@@ -23,27 +22,30 @@ data_grafik$f01new <- as.factor(data_grafik$f01new)
 data_grafik$f01new <- plyr::mapvalues(data_grafik$f01new, from = c(1, 2), to = c("Ja", "Nein"))
 
 #Extra Datensatz data_grafik f?r Grafiken
-data_grafik <- data.frame(data$f01new, data$f0201,  data$f0202, data$f11, data$f14, data$f15, data$f0201new, data$f03, data$f04, data$f05, data$f06, data$f07, data$f12, data$f20, data$Mig )
+data_grafik <- data.frame(data$f0201,  data$f0202, data$f11, data$f14, data$f15, data$f0201new, data$f03, data$f04, data$f05, data$f06, data$f07, data$f12, data$f20, data$Mig )
 data_ja_grafik <- data_ja
 
 data_grafik$f0201 <- as.factor(data_grafik$data.f0201)
-data_grafik$f0201 <-  plyr::mapvalues(data_grafik$f0201, from = c(1, 2, 3, 4, 5), to = c("(fast) t?glich", "1-3 Mal pro Woche", "1-3 Mal pro Monat", "seltener als 1 Mal im Monat", "(fast) nie"))
+data_grafik$f0201 <-  plyr::mapvalues(data_grafik$f0201, from = c(1, 2, 3, 4, 5), to = c("(fast) täglich", "1-3 Mal pro Woche", "1-3 Mal pro Monat", "seltener als 1 Mal im Monat", "(fast) nie"))
 data_ja_grafik$f0201 <- as.factor(data_ja_grafik$f0201)
-data_ja_grafik$f0201 <-  plyr::mapvalues(data_ja_grafik$f0201, from = c(1, 2, 3, 4, 5), to = c("(fast) t?glich", "1-3 Mal pro Woche", "1-3 Mal pro Monat", "seltener als 1 Mal im Monat", "(fast) nie"))
+data_ja_grafik$f0201 <-  plyr::mapvalues(data_ja_grafik$f0201, from = c(1, 2, 3, 4, 5), to = c("(fast) täglich", "1-3 Mal pro Woche", "1-3 Mal pro Monat", "seltener als 1 Mal im Monat", "(fast) nie"))
 data_grafik$f0202 <- as.factor(data_grafik$data.f0202)
-data_grafik$f0202 <-  plyr::mapvalues(data_grafik$f0202, from = c(1, 2, 3, 4, 5), to = c("(fast) t?glich", "1-3 Mal pro Woche", "1-3 Mal pro Monat", "seltener als 1 Mal im Monat", "(fast) nie"))
+data_grafik$f0202 <-  plyr::mapvalues(data_grafik$f0202, from = c(1, 2, 3, 4, 5), to = c("(fast) täglich", "1-3 Mal pro Woche", "1-3 Mal pro Monat", "seltener als 1 Mal im Monat", "(fast) nie"))
 data_grafik$f11 <-plyr::mapvalues(data_grafik$data.f11, from = c(1, 2), to = c("Ja", "Nein")) 
-data_grafik$f14 <-plyr::mapvalues(data_grafik$data.f14, from = c(1, 2, 3, 4), to = c("Gro?stadt", "Stadt", "Vorort einer Gro?stadt", "Dorf"))  
+data_grafik$f14 <-plyr::mapvalues(data_grafik$data.f14, from = c(1, 2, 3, 4), to = c("Großstadt", "Stadt", "Vorort einer Großstadt", "Dorf"))  
 data_grafik$f0201new <- as.factor(data_grafik$data.f0201new)  
 data_grafik$f0201new <-plyr::mapvalues(data_grafik$f0201new, from = c(1, 0), to = c("Ja", "Nein"))  
 data_grafik$f15 <-plyr::mapvalues(data_grafik$data.f15, from = c(0, 1, 2, 3, 4, 5, 6), to = c("noch in schulischer Ausbildung", "kein Schulabschluss", "Volksschul-/Hauptschul-/ Mittelschulabschluss", "Realschulabschluss/Mittlere Reife", "Abschluss der Polytechnischen Oberschule (DDR)", "Fach-/Abitur", "abgeschlossenes Studium"))  
 data_grafik$f03 <-plyr::mapvalues(data_grafik$data.f03, from = c(1, 2, 3, 4, 5, 6), to = c("Jahreskarte", "Monatskarte", "Wochenkarte", "Studentenkarte", "andere", "keine"))
-data_grafik$f04 <-plyr::mapvalues(data_grafik$data.f04, from = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 88, 99), to = c("Ver?nderung Infrastruktur", "(beinahe) Radunfall", "Teilnahme an Radtraining", "Radfahren gelernt", "Rad verf?gbar", "kein Rad verf?gbar", "E-Bike verf?gbar", "kein E-Bike verf?gbar", "?PNV Dauerkarte verf?gbar", "keine ?PNV Dauerkarte verf?gbar", "Auto Nutzung m?glich", "keine Auto Nutzung m?glich", "andere Ver?nderung", "keine Ver?nderung")) 
-data_grafik$f05 <- plyr::mapvalues(data_grafik$data.f05, from = c(1, 2, 3 ,4, 5, 6), to = c("weder davor noch danach", "angefangen Rad zu fahren", "danach h?ufiger", "danach gleich oft", "danach seltener", "danach gar nicht mehr"))  
+data_grafik$f04 <-plyr::mapvalues(data_grafik$data.f04, from = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 88, 99), to = c("Veränderung Infrastruktur", "(beinahe) Radunfall", "Teilnahme an Radtraining", "Radfahren gelernt", "Rad verfügbar", "kein Rad verfügbar", "E-Bike verfügbar", "kein E-Bike verfügbar", "ÖPNV Dauerkarte verfügbar", "keine ÖPNV Dauerkarte verfügbar", "Auto Nutzung möglich", "keine Auto Nutzung möglich", "andere Veränderung", "keine Veränderung")) 
+data_grafik$f05 <- plyr::mapvalues(data_grafik$data.f05, from = c(1, 2, 3 ,4, 5, 6), to = c("weder davor noch danach", "angefangen Rad zu fahren", "danach häufiger", "danach gleich oft", "danach seltener", "danach gar nicht mehr"))  
 data_grafik$f06 <-plyr::mapvalues(data_grafik$data.f06, from = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 88, 99), to = c("Umzug", "Beginn Studium/Ausbildung", "Jobwechsel", "Renteneintritt", "Arbeitslos", "Ende Partnerschaft", "Geburt 1. Kind", "Kind ausgezogen","Geburt 1. Enkel", "Krankheit", "Krankheit Partner", "anderes", "keins")) 
-data_grafik$f07 <- plyr::mapvalues(data_grafik$data.f07, from = c(1, 2, 3 ,4, 5, 6), to = c("weder davor noch danach", "angefangen Rad zu fahren", "danach h?ufiger", "danach gleich oft", "danach seltener", "danach gar nicht mehr"))  
-data_grafik$f12 <-plyr::mapvalues(data_grafik$data.f12, from = c(1, 2), to = c("m?nnlich", "weiblich"))
+data_grafik$f07 <- plyr::mapvalues(data_grafik$data.f07, from = c(1, 2, 3 ,4, 5, 6), to = c("weder davor noch danach", "angefangen Rad zu fahren", "danach häufiger", "danach gleich oft", "danach seltener", "danach gar nicht mehr"))  
+data_grafik$f12 <-plyr::mapvalues(data_grafik$data.f12, from = c(1, 2), to = c("männlich", "weiblich"))
 data_grafik$Mig <- plyr::mapvalues(data_grafik$data.Mig, from = c(1, 2), to = c("Ja", "Nein"))
+
+data_grafik$f15 <- as.factor(data_grafik$f15)
+data_grafik$f15 <- ordered(data_grafik$f15,levels=c("noch in schulischer Ausbildung", "kein Schulabschluss", "Volksschul-/Hauptschul-/ Mittelschulabschluss", "Realschulabschluss/Mittlere Reife", "Abschluss der Polytechnischen Oberschule (DDR)", "Fach-/Abitur", "abgeschlossenes Studium"))
 
 #speichern der datensätze data_ja_grafik und data_grafik
 write.csv(data_ja_grafik, "data_ja_grafik.csv")
@@ -64,12 +66,19 @@ ggplot(data_grafik, aes(data_grafik$f0201)) + geom_bar(aes(y=..count../sum(..cou
   ylab("Anzahl Personen")+
   ggtitle("Wie oft f?hrt eine Person Fahrrad")
 
+# fährt eine person rad
+ggplot(data_grafik, aes(data_grafik$f0201new, fill=f0201new)) + geom_bar(aes(y=..count../sum(..count..)), show.legend = F)+
+  xlab("Fahrradfahrer") +
+  ylab("Anteil Personen")+ ylim(c(0,0.7))+
+  ggtitle("Fährt eine Person Fahrrad")+ theme_minimal()
+
 # wie oft fahren die leute die ein rad haben
 
-ggplot(data_ja_grafik, aes(data_ja_grafik$f0201)) + geom_bar(aes(y=..count../sum(..count..)), fill = "blue")+
-  xlab("H?ufigkeit") +
-  ylab("Anzahl Personen")+
-  ggtitle("Wie oft f?hrt eine Person Fahrrad, die ein Fahrrad besitzt")
+ggplot(data_ja_grafik, aes(data_ja_grafik$f0201)) + geom_bar(aes(y=..count../sum(..count..)), fill = "cadetblue")+
+  xlab("Häufigkeit") +
+  ylab("Anteil Personen")+
+  ggtitle("Wie oft fährt eine Person Fahrrad, die ein Fahrrad besitzt")+
+  theme_minimal()
 
 # wer hat ein ebike
 data_ja$f0101 <- plyr::mapvalues(data_ja$f0101, from = c(1, 2), to = c("Ja", "Nein"))
@@ -126,7 +135,7 @@ mosaicplot(a,
 
 # schulabschluss
 c <- table(data_grafik$f15, data_grafik$f0201)
-mosaicplot(c,
+mosaicplot(table(data_grafik$f15, data_grafik$f0201),
            main="Mosaikplot f?r die Fahrradnutzung unterschieden am Schulabschluss",
            xlab="Schulabschluss",
            ylab="Fahrradnutzung")
@@ -137,7 +146,7 @@ mosaicplot(table(data_grafik$f15, data_grafik$f0201new),
            ylab="Fahrradfahrer")
 
 # ?PNV
-mosaicplot(table(data_grafik$f03, data_grafik$f0201new),
+mosaicplot(table(data_grafik$f03new, data_grafik$f0201new),
            main="Mosaikplot f?r die Fahrradfahrer unterschieden an der Nutzung des ?PNV",
            xlab="Dauerkarte",
            ylab="Fahrradfahrer")

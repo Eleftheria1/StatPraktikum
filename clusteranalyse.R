@@ -4,7 +4,7 @@ library(tidyverse)
 library(gridExtra)
 
 # data transformation
-data_clust <- data %>%
+data_clust <- data_NA %>%
   mutate_if(is.numeric,function(x){as.numeric(scale(x))}) %>%
   filter(f0201new == "0") %>% #fahrradfahrer raus
   select(-f0201new)
@@ -33,7 +33,7 @@ plot_list <- sapply(1:(dim(data_clust2)[2]-1), function(f){
     theme_bw()
 },simplify = F)
 
-plot_list[[59]]
+plot_list[[3]]
 
 ggplot(data_clust2,aes(x = f20,fill = factor(cluster)))+
   geom_bar(position = "dodge")

@@ -8,7 +8,7 @@ library("dplyr")
 
 setwd("C:/Users/elefi/OneDrive/Desktop/5FS/statistisches praktikum")
 setwd("C:/Users/Eleftheria/OneDrive/Desktop/5FS/statistisches praktikum/Daten")
-data_alt <- read_sav("Daten_RadAktiv_final_Kunde.sav")
+data_sav <- read_sav("Daten_RadAktiv_final_Kunde.sav")
 
 #datensatz herrichten
 data <- read.csv("data.csv")

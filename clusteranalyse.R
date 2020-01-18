@@ -3,17 +3,22 @@ library(dendextend)
 library(tidyverse)
 library(gridExtra)
 
-#einmal mit data_NA
+#################################################################################
+#                 Clusteranalyse mit Datensatz ohne NAs
+#                             2 Cluster
+################################################################################
 # data transformation
 data_clust <- data_NA %>%
   #mutate_if(is.numeric,function(x){as.numeric(scale(x))}) %>%
   filter(f0201new == "0") %>% #fahrradfahrer raus
   dplyr::select(-f0201new)
 
+#Clusteranalyse
 dist_gower <- daisy(data_clust, metric = "gower")
 
 hc_obj <- hclust(dist_gower, method = "complete")
 
+#Dendogramm
 plot(hc_obj)
 hc_dend <- as.dendrogram(hc_obj)
 hc_dend_col <- color_branches(hc_dend, k = 2)
@@ -54,8 +59,12 @@ plot_list[[39]]
 ggplot(data_clust2,aes(x = f20,fill = factor(cluster)))+
   geom_bar(position = "dodge")
 
-##################################################################
-#Ein mal mit data normal 
+
+#################################################################################
+#                 Clusteranalyse mit Datensatz einschließlich NAs
+#                             3 Cluster
+################################################################################
+
 # data transformation
 data_clust1 <- data %>%
   #mutate_if(is.numeric,function(x){as.numeric(scale(x))}) %>%
@@ -99,6 +108,7 @@ plot_list1[[20]]
 plot_list1[[28]]
 plot_list1[[29]]
 plot_list1[[30]]
+plot_list1[[31]]
 plot_list1[[32]]
 plot_list1[[35]]
 plot_list1[[39]]
